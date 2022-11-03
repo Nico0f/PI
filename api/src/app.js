@@ -24,6 +24,10 @@ server.use((req, res, next) => {
 
 server.use('/', routes);
 
+server.get('/', (req, res) => {   // agregue esto
+  res.send('Henry Sequelize Homework');    // agregue esto
+});   // agregue esto
+
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   const status = err.status || 500;

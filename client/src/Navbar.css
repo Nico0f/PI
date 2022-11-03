@@ -1,0 +1,11 @@
+.Navbar {
+    display: flex;
+    padding: 10px;
+    height: 50px;
+    justify-content: space-between;
+    color: antiquewhite;
+}
+
+.Navbar > input {
+    width: 75%;
+}
