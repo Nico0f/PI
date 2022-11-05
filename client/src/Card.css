@@ -1,0 +1,17 @@
+.Card {
+    display: inline-flex;
+    background-color: aqua;
+    width: 380px;
+    height: 400px;
+    margin: 20px;
+}
+
+.Card-content {
+    display: inline-block;
+
+}
+
+.Card-img {
+    width: 380px;
+    height: 250px;
+}

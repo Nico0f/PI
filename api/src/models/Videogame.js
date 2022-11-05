@@ -21,5 +21,8 @@ module.exports = (sequelize) => {
     platforms: {
       type: DataTypes.STRING
     },
+    img: {
+      type: DataTypes.STRING
+    }
   });
 };

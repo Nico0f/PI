@@ -6,23 +6,27 @@ import Home from './Home';
 import Navbar from './Navbar';
 import reportWebVitals from './reportWebVitals';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import  { Provider } from 'react-redux';
+import store from "./store"
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Switch>
-        <Route exact path="/">
-        <Home />
-        </Route>
-      </Switch>
-        <Route exact path="/home">
-          <Navbar/>
-          <Switch>
-            <App />
-          </Switch>
-        </Route>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+          <Home />
+          </Route>
+        </Switch>
+          <Route exact path="/home">
+            <Navbar/>
+            <Switch>
+              <App />
+            </Switch>
+          </Route>
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

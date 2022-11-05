@@ -37,3 +37,17 @@
     transform: rotate(360deg);
   }
 }
+
+.mainDiv {
+  display: flex;
+  color: white
+}
+
+.sideBar {
+  width: 45%;
+  text-align: left;
+}
+
+/* .cardDiv {
+
+} */

@@ -6,6 +6,9 @@ module.exports = (sequelize) => {
   sequelize.define('Genre', {
     genre_name: {
       type: DataTypes.STRING,
+    },
+    games: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
     }
   });
 };
