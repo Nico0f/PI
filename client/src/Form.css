@@ -1,0 +1,13 @@
+.fieldSet {
+    columns: 4 8em;
+}
+
+.fieldSet > legend {
+    background-color: #000;
+    color: #fff;
+    padding: 3px 6px;
+}
+
+.fieldSet > input {
+    margin: .4rem;
+}

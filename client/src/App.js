@@ -55,7 +55,7 @@ function App() {
     // disptach(add_game({name:"hola", id:2}))
     // disptach(loading())
     // console.log(state)
-    history.push('/creategame')
+    history.push('/home/creategame')
   }
 
   function changeGenre(value) {

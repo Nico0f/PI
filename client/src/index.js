@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import Home from './Home';
 import Navbar from './Navbar';
+import Form from './Form';
 import reportWebVitals from './reportWebVitals';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import  { Provider } from 'react-redux';
@@ -14,16 +15,19 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <Switch>
           <Route exact path="/">
           <Home />
           </Route>
-        </Switch>
-          <Route exact path="/home">
+          <Route path="/home">
             <Navbar/>
-            <Switch>
-              <App />
-            </Switch>
+              <Switch>
+                <Route exact path="/home">
+                  <App />
+                </Route>
+                <Route exact path="/home/creategame">
+                  <Form />
+                </Route>
+              </Switch>
           </Route>
       </Router>
     </Provider>
