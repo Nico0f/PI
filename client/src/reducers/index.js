@@ -1,7 +1,10 @@
 const initialState = {
     games: [],
     loading: false,
-    genres: []
+    genres: [],
+    genre: "",
+    typeView: "",
+    search: []
   }
   
 export default (state = initialState, action) => {
@@ -25,6 +28,16 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 genres: [...state.genres, action.payload]
+            }
+        case 'CHANGE_VIEW':
+            return {
+                ...state,
+                typeView: action.payload
+            }
+        case 'ADD_SEARCH':
+            return {
+                ...state,
+                search: action.payload
             }
         default:
             return { ...state }

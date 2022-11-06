@@ -20,15 +20,19 @@ router.get("/videogame", async (req, res) => {
   for (let i = 1; i<4; i++) {
     
     let apiData = await axios.get(`https://api.rawg.io/api/games?key=a0a928bd1bc7405381049cd878fad844&page=${i}&page_size=40`)
-      .then(response => response)
+      .then(response => response.data)
       
-    apiData.data.results.map( element => {
-      const {name, released, background_image} = element
+    apiData.results.map( element => {
+      const {name, released, background_image, rating} = element;
+      // const platforms = []
+      // apiData.results
       Videogame.create({
         name,
         description: name,
         release_date: released,
-        img: background_image
+        img: background_image,
+        rating
+
       })
         
     })
@@ -62,12 +66,17 @@ router.get("/videogames", async (req, res) => {
       let apiData = await axios.get(`https://api.rawg.io/api/games?key=a0a928bd1bc7405381049cd878fad844&page=${i}&page_size=40`)
         .then(response => response.data.results)
         .then(data => data.map(element => {
-          const {name, released, background_image} = element
+          const {name, released, background_image, rating_top, rating} = element
+          const platforms = []
+          element.platforms.forEach(e => platforms.push(e.platform.name))
           Videogame.create({
           name,
           description: name,
           release_date: released,
-          img: background_image
+          img: background_image,
+          rating_int: rating_top,
+          rating_float: rating,
+          platforms
         })
         }))
         .catch(error => console.log(error))

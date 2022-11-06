@@ -32,6 +32,20 @@ export function allgames() {
         .catch(e => console.log(e));
     }
   }
+
+  export function changeView(payload) {
+      return {
+        type: 'CHANGE_VIEW',
+        payload
+      }
+ 
+    }
+  export function addSearch(payload) {
+      return {
+        type: 'ADD_SEARCH',
+        payload
+      }
+    }
   
 // export function receivePost(post) {
 //     return {

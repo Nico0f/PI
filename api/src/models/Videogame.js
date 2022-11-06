@@ -15,11 +15,14 @@ module.exports = (sequelize) => {
     release_date: {
       type: DataTypes.DATEONLY
     },
-    rating: {
+    rating_int: {
       type: DataTypes.INTEGER
     },
+    rating_float: {
+      type: DataTypes.FLOAT
+    },
     platforms: {
-      type: DataTypes.STRING
+      type: DataTypes.ARRAY(DataTypes.STRING)
     },
     img: {
       type: DataTypes.STRING
