@@ -44,6 +44,11 @@ export default (state = initialState, action) => {
                 ...state,
                 search: action.payload
             }
+        case 'CREATE_VIDEOGAME':
+            return {
+                ...state,
+                games: [...state.games, action.payload]
+            }
         default:
             return { ...state }
     }

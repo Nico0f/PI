@@ -22,13 +22,13 @@ export default function Form() {
     )
 
     const [errors, setErrors] = React.useState({
-        name: "", 
-        description: "", 
-        releaseDate: "", 
+        name: 'Name is required', 
+        description: 'Description must be longer than 10 characters and shorter than 300 characters', 
+        releaseDate: 'Release Date is required', 
         img: "", 
-        rating: "", 
-        genres: "",
-        platforms: ""
+        rating: 'Rating is required', 
+        genres: 'Genres are required',
+        platforms: 'Platforms are required'
     })
 
 
@@ -51,8 +51,14 @@ export default function Form() {
         if (value.releaseDate.length) {
             setErrors((prevState) => ({...prevState, releaseDate: ''}))
         }
+        if (!value.rating) {
+            setErrors((prevState) => ({...prevState, rating: 'Rating is required'}))
+        }
+        if (value.rating) {
+            setErrors((prevState) => ({...prevState, rating: ''}))
+        }
         if (!value.genres.length) {
-            setErrors((prevState) => ({...prevState, genres: 'Rating is required'}))
+            setErrors((prevState) => ({...prevState, genres: 'Genres are required'}))
         }
         if (value.genres.length) {
             setErrors((prevState) => ({...prevState, genres: ''}))
@@ -98,11 +104,25 @@ export default function Form() {
         setFormData((prevState) => ({...prevState, rating: parseInt(event.target.value)}))
     }
     
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault()
         // /index.html?firstName=asdasd&lastName=asdasd&email=&comments=&isFriendly=on&favColor=red
         // submitToApi(formData)
-        axios.post("http://localhost:3001/videogames", formData)
+        try {
+            await axios.post("http://localhost:3001/videogames", formData)
+                .then(data => setFormData({
+                    name: "", 
+                    description: "", 
+                    releaseDate: "",
+                    img: "",
+                    rating: 0, 
+                    genres: [],
+                    platforms: []
+                }))
+            alert("Videogame created")
+        } catch {
+            alert("Error")
+        }
     }
 
     function a() {
@@ -659,6 +679,7 @@ export default function Form() {
         </form>
             <button onClick={handleSubmit}>Submit</button>
             <button onClick={()=> console.log(formData)}>Submit</button>
+            <button onClick={()=> console.log(errors)}>Submit</button>
         </div>
     )
 }

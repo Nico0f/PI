@@ -1,3 +1,4 @@
+import axios from "axios"
 export function add_game(payload) {
     return {
       type: 'ADD_GAME',
@@ -33,8 +34,8 @@ export function add_all(payload) {
 
 export function allgames() {
     return function (dispatch) {
-        fetch("http://localhost:3001/videogames")
-        .then(res => res.json())
+        axios.get("http://localhost:3001/videogames")
+        .then(res => res.data)
         .then(d => dispatch(add_game(d)))
         .catch(e => console.log(e));
     }
@@ -50,6 +51,13 @@ export function allgames() {
   export function addSearch(payload) {
       return {
         type: 'ADD_SEARCH',
+        payload
+      }
+    }
+  export function createVideogame(payload) {
+    axios.post("http://localhost:3001/videogames")
+      return {
+        type: 'CREATE_VIDEOGAME',
         payload
       }
     }

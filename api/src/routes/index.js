@@ -1,10 +1,11 @@
+require("dotenv").config();
+const { API_KEY } = process.env;
 const { Router } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const express = require("express");
 const { Op, Videogame, Genre } = require("../db.js");
 const axios = require('axios');
-
 
 const router = Router();
 
@@ -15,31 +16,31 @@ router.use(express.json());
 
 //agrego aca abajo
 
-router.get("/videogame", async (req, res) => {
+// router.get("/videogame", async (req, res) => {
 
-  // "https://api.rawg.io/api/games?key=a0a928bd1bc7405381049cd878fad844&page_size=40"
+//   // "https://api.rawg.io/api/games?key=a0a928bd1bc7405381049cd878fad844&page_size=40"
   
   
-  for (let i = 1; i<4; i++) {
+//   for (let i = 1; i<4; i++) {
     
-    let apiData = await axios.get(`https://api.rawg.io/api/games?key=a0a928bd1bc7405381049cd878fad844&page=${i}&page_size=40`)
-      .then(response => response.data)
+//     let apiData = await axios.get(`https://api.rawg.io/api/games?key=a0a928bd1bc7405381049cd878fad844&page=${i}&page_size=40`)
+//       .then(response => response.data)
       
-    apiData.results.map( element => {
-      const {name, released, background_image, rating} = element;
-      // const platforms = []
-      // apiData.results
-      Videogame.create({
-        name,
-        description: name,
-        release_date: released,
-        img: background_image,
-        rating
+//     apiData.results.map( element => {
+//       const {name, released, background_image, rating} = element;
+//       // const platforms = []
+//       // apiData.results
+//       Videogame.create({
+//         name,
+//         description: name,
+//         release_date: released,
+//         img: background_image,
+//         rating
 
-      })
+//       })
         
-    })
-  }
+//     })
+//   }
   // agrego genres
   // let apiGenres = await axios.get(`https://api.rawg.io/api/genres?key=a0a928bd1bc7405381049cd878fad844`)
   //       .then(response => response)
@@ -54,8 +55,8 @@ router.get("/videogame", async (req, res) => {
 
   // agrego genres ^
 
-  res.send( "got em")
-})
+//   res.send( "got em")
+// })
 
 router.get("/videogames", async (req, res) => {
 
@@ -66,7 +67,7 @@ router.get("/videogames", async (req, res) => {
   if(!games.length) {
     for (let i = 1; i<4; i++) {
     
-      let apiData = await axios.get(`https://api.rawg.io/api/games?key=a0a928bd1bc7405381049cd878fad844&page=${i}&page_size=40`)
+      let apiData = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=${i}&page_size=40`)
         .then(response => response.data.results)
         .then(data => data.map(element => {
           const {name, released, background_image, rating_top, rating} = element
@@ -171,7 +172,7 @@ router.get("/genres", async (req, res) => {
     console.log("desde db")
     res.status(202).send( genresDb )
   } else {
-    axios.get(`https://api.rawg.io/api/genres?key=a0a928bd1bc7405381049cd878fad844`)
+    axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
         .then(response => response.data)
         .then(data => data.results.map(element =>
         {const {name} = element
@@ -203,16 +204,22 @@ router.get("/genres", async (req, res) => {
 
 router.post("/videogames", async (req, res) => {
   const {name, description, img, releaseDate, rating, platforms} = req.body
+    
+  try {
     const videoGame = await Videogame.create({
-        name,
-        description,
-        release_date: releaseDate,
-        img,
-        rating_int: rating,
-        platforms,
-        FormCreated: true
-      });
-      res.status(201).json(videoGame);
+          name,
+          description,
+          release_date: releaseDate,
+          img,
+          rating_int: rating,
+          platforms,
+          FormCreated: true
+        });
+        res.status(201).json(videoGame);
+
+  } catch {
+    res.send("Error when creating videogame")
+  }
 })
 
 router.get('/', (req, res) => {   // agregue esto
