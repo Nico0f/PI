@@ -5,7 +5,7 @@
 .mainDiv-game {
     margin: auto;
     border: solid white;
-    width: 75%;
+    width: 50%;
     color: azure;
     background-color: #232323;
 }
@@ -16,4 +16,8 @@
 
 .infoDiv {
     margin-left: 12px;
+}
+
+.gameContent {
+    margin: 25px;
 }

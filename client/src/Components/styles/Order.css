@@ -1,0 +1,10 @@
+.selectType {
+    margin-top: 15PX;
+    display: grid;
+    font-size: 12PX;
+}
+
+.orderDiv {
+    background-color: #1a222d;
+    border-radius: 20px;
+}

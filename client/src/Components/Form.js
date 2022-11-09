@@ -1,14 +1,14 @@
 import React from "react"
-import './Form.css';
-import axios from "axios"
+import './styles/Form.css';
+import { createVideogame } from "../actions/index"
 
 
 
 
 export default function Form() {
 
-
-
+    
+    
     const [formData, setFormData] = React.useState(
         {
             name: "", 
@@ -18,19 +18,17 @@ export default function Form() {
             rating: 0, 
             genres: [],
             platforms: []
-        }
-    )
-
-    const [errors, setErrors] = React.useState({
-        name: 'Name is required', 
-        description: 'Description must be longer than 10 characters and shorter than 300 characters', 
-        releaseDate: 'Release Date is required', 
-        img: "", 
-        rating: 'Rating is required', 
-        genres: 'Genres are required',
-        platforms: 'Platforms are required'
-    })
-
+        })
+        
+        const [errors, setErrors] = React.useState({
+            name: 'Name is required', 
+            description: 'Description must be longer than 10 characters and shorter than 300 characters', 
+            releaseDate: 'Release Date is required', 
+            img: 'Image URL invalid', 
+            rating: 'Rating is required', 
+            genres: 'Genres are required',
+            platforms: 'Platforms are required'
+        })
 
     function validate(value) {
         if (!value.name) {
@@ -44,6 +42,12 @@ export default function Form() {
         }
         if (value.description.length>=10 && value.description.length<300) {
             setErrors((prevState) => ({...prevState, description: ''}))
+        }
+        if (!value.img) {
+            setErrors((prevState) => ({...prevState, img: 'Image URL invalid'}))
+        }
+        if (value.img) {
+            setErrors((prevState) => ({...prevState, img: ''}))
         }
         if (!value.releaseDate.length) {
             setErrors((prevState) => ({...prevState, releaseDate: 'Release Date is required'}))
@@ -73,21 +77,14 @@ export default function Form() {
       }
       function handleChangeText(event) {
           const {name, value} = event.target
-          validate(formData)
-          setFormData((prevState) => ({...prevState, [name]: value}))
+          setFormData((prevState) => ({...prevState, [name]: value}));
+          validate(formData);
       }
     
     function handleChange(event) {
-        // const {name, value, type, checked} = event.target
-        // setFormData(prevFormData => {
-        //     return {
-        //         ...prevFormData,
-        //         [name]: type === "checkbox" ? checked : value
-        //     }
-        // })
         const {name, value} = event.target
         validate(formData)
-
+        
         if (!formData[name].includes(value)){
             setFormData((prevState) => ({...prevState, [name]: [...prevState[name], value]}))
             console.log("agrego")
@@ -95,7 +92,7 @@ export default function Form() {
             setFormData((prevState) => ({...prevState, [name]: prevState[name].filter(e => e !== value)}))
             console.log("saco")
         }
-
+        
     }
 
 
@@ -106,22 +103,33 @@ export default function Form() {
     
     async function handleSubmit(event) {
         event.preventDefault()
-        // /index.html?firstName=asdasd&lastName=asdasd&email=&comments=&isFriendly=on&favColor=red
-        // submitToApi(formData)
-        try {
-            await axios.post("http://localhost:3001/videogames", formData)
-                .then(data => setFormData({
-                    name: "", 
-                    description: "", 
-                    releaseDate: "",
-                    img: "",
-                    rating: 0, 
-                    genres: [],
-                    platforms: []
-                }))
-            alert("Videogame created")
-        } catch {
-            alert("Error")
+        if (errors.name || errors.description || errors.img || errors.rating || errors.releaseDate || errors.platforms || errors.genres) {
+            alert("Missing fields")
+        } else {
+            try {
+                createVideogame(formData)
+                setFormData({
+                        name: "", 
+                        description: "", 
+                        releaseDate: "",
+                        img: "",
+                        rating: 0, 
+                        genres: [],
+                        platforms: []
+                    })
+                setErrors({
+                    name: 'Name is required', 
+                    description: 'Description must be longer than 10 characters and shorter than 300 characters', 
+                    releaseDate: 'Release Date is required', 
+                    img: 'Image URL invalid', 
+                    rating: 'Rating is required', 
+                    genres: 'Genres are required',
+                    platforms: 'Platforms are required'
+                })
+                alert("Videogame created")
+            } catch {
+                alert("Error")
+            }
         }
     }
 
@@ -133,10 +141,8 @@ export default function Form() {
 
     return (
         <div className="formDiv">
-                {/* <button onClick={() => {console.log(errors)}}></button> */}
             <h2 style={{textAlign:"center"}}>Game Information</h2>
             <form onSubmit={handleSubmit}>
-            {/* <button type="button" onClick={a}></button> */}
             <div className="formContainer">
             <div className="infoFirst">
             <div>
@@ -147,7 +153,7 @@ export default function Form() {
                 onChange={handleChangeText}
                 name="name"
                 value={formData.name}
-                className="textBox"
+                className={errors.name ? "textBoxError" : "textBox"}
             />
 
             <h2>Description</h2>
@@ -156,30 +162,8 @@ export default function Form() {
                 placeholder="Description..."
                 onChange={handleChangeText}
                 name="description"
-                className="textArea"
+                className={errors.description ? "textAreaError" : "textArea"}
             />
-            {/* <input
-                type="text"
-                placeholder="Description"
-                onChange={handleChange}
-                name="description"
-                value={formData.description}
-            /> */}
-            {/* <input
-                type="releaseDate"
-                placeholder="Release Date"
-                onChange={handleChange}
-                name="releaseDate"
-                value={formData.releaseDate}
-            /> */}
-            {/* <input 
-                type="checkbox" 
-                id="isFriendly" 
-                checked={formData.isFriendly}
-                onChange={handleChange}
-                name="isFriendly"
-            /> */}
-            {/* <label htmlFor="isFriendly">Are you friendly?</label> */}
             <br />
             <label htmlFor="releaseDate">Release Date</label>
                     <input type="date" id="releaseDate" name="releaseDate"
@@ -214,13 +198,13 @@ export default function Form() {
             onChange={handleChangeText}
             name="img"
             value={formData.img}
-            className="textBox"
+            className={errors.img ? "textBoxError" : "textBox"}
         />
 
         </div>
         <div className="infoSecond">
             
-            <fieldset className="fieldSet">
+            <fieldset className={errors.genres ? "fieldSetError" : "fieldSet"}>
                     <legend>Genres</legend>
 
                     <input
@@ -439,7 +423,7 @@ export default function Form() {
 
 
 
-                <fieldset className="fieldSet">
+                <fieldset className={errors.platforms ? "fieldSetError" : "fieldSet"}>
                     <legend>Platforms</legend>
 
                     <input
@@ -677,44 +661,9 @@ export default function Form() {
             </div>
             </div>
         </form>
+        <div style={{textAlign:"center"}}>
             <button onClick={handleSubmit}>Submit</button>
-            <button onClick={()=> console.log(formData)}>Submit</button>
-            <button onClick={()=> console.log(errors)}>Submit</button>
+        </div>
         </div>
     )
 }
-
-// [
-//     "PC",
-//     "Xbox Series S/X",
-//     "PlayStation 4",
-//     "PlayStation 3",
-//     "Xbox 360",
-//     "Xbox One",
-//     "PlayStation 5",
-//     "Nintendo Switch",
-//     "Linux",
-//     "macOS",
-//     "Android",
-//     "iOS",
-//     "Xbox",
-//     "PS Vita",
-//     "Web",
-//     "Wii U",
-//     "Nintendo 3DS",
-//     "PlayStation 2",
-//     "Dreamcast",
-//     "PSP"
-//   ]
-
-// Ruta de creación de videojuegos: debe contener
-
-// [ ] Un formulario controlado con JavaScript con los siguientes campos:
-// Nombre
-// Descripción
-// Fecha de lanzamiento
-// Rating
-// [ ] Posibilidad de seleccionar/agregar varios géneros
-// [ ] Posibilidad de seleccionar/agregar varias plataformas
-// [ ] Botón/Opción para crear un nuevo videojuego
-// Es requisito que el formulario de creación esté validado con JavaScript y no sólo con validaciones HTML. Pueden agregar las validaciones que consideren. Por ejemplo: Que el nombre del juego no pueda contener algunos símbolos, que el rating no pueda exceder determinado valor, etc.

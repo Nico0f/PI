@@ -1,5 +1,6 @@
 import {changeView} from "../actions/index";
 import { useDispatch, useSelector } from "react-redux";
+import "./styles/Order.css"
 
 
 export default function Order() {
@@ -12,11 +13,10 @@ export default function Order() {
     }
 
 
-
-
     return (
-        <div>
-            <label htmlFor="order">Sort by alphabetical</label>
+        <div className="orderDiv">
+            <div className="selectType">
+            <label htmlFor="order">SORT BY ALPHABETICAL ORDER</label>
             <select 
                 id="order" 
                 value={typeView}
@@ -27,8 +27,10 @@ export default function Order() {
                 <option value="asc">Alphabetical A-Z</option>
                 <option value="desc">Alphabetical Z-A</option>
             </select>
+            </div>
             <br></br>
-            <label htmlFor="order">Sort by rating</label>
+            <div className="selectType">
+            <label htmlFor="order">SORT BY RATING</label>
             <select 
                 id="order" 
                 value={typeView}
@@ -40,8 +42,10 @@ export default function Order() {
                 <option value="ratingdesc">Rating 5-1</option>
 
             </select>
+            </div>
             <br></br>
-            <label htmlFor="order">Sort by origin</label>
+            <div className="selectType">
+            <label htmlFor="order">SORT BY ORIGIN OF DATA</label>
             <select 
                 id="order" 
                 value={typeView}
@@ -52,6 +56,7 @@ export default function Order() {
                 <option value="api">DataBase</option>
                 <option value="db">API</option>
             </select>
+            </div>
         </div>
     )
 

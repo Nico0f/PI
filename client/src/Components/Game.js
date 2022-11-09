@@ -1,8 +1,7 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
 import axios from 'axios';
-import "./Game.css"
-import { useSelector } from "react-redux";
+import "./styles/Game.css"
 
 export default function Game() {
 
@@ -17,28 +16,16 @@ export default function Game() {
         axios.get(`http://localhost:3001/videogame/${params.id}`)
             .then(res => res.data)
             .then(data => setGame(data))
-            // .then(data => data.filter(e=> e.games.includes(game.name)))
-            // .then(data => console.log(data))
-        
-            // .then(data => setGame((prevState) => ([...prevState, data])))
     }, []) 
     React.useEffect(() => {
         axios.get("http://localhost:3001/genres")
             .then(res => res.data)
             .then(data => data.filter(e => e.games.includes(game[0].name)))
             .then(data => data.forEach(e => setGenres((prevState) => ({...prevState, genres: [...prevState.genres, e.genre_name]}))))
-            
-            // .then(data => setGenres(data))
-            // .then(data => data.filter(e=> e.games.includes(game.name)))
-            // .then(data => console.log(data))
-        
-            // .then(data => setGame((prevState) => ([...prevState, data])))
     }, [game]) 
 
     let displayGenres = genres.genres.map(e=> <li key={e}>{e}</li>)
     let displayPlatforms = game[0].platforms.map(e=> <li key={e}>{e}</li>)
-// let genresDisplay= genres.map(e => <span>{e} </span>)
-console.log(displayPlatforms)
 
     return (
         <div className="mainDiv-game">
@@ -56,9 +43,12 @@ console.log(displayPlatforms)
 
             </div>
             <hr></hr>
+            <div className="gameContent">
             <h2>Description</h2>
             <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut leo dui. Aliquam erat volutpat. Maecenas mollis tincidunt sodales. Integer at erat leo. Etiam vitae mattis elit. In dignissim velit rutrum accumsan posuere. Proin ut auctor dolor, nec auctor mauris. Vivamus sed vestibulum tellus. Integer rutrum aliquam felis, a bibendum nibh iaculis et. Suspendisse mattis fringilla nisi, et finibus est vulputate et. Curabitur semper vehicula mauris sed bibendum. Quisque facilisis ligula quis diam hendrerit fermentum. Pellentesque vel orci lacus. Donec vitae orci ipsum. Vestibulum auctor, erat nec ornare facilisis, massa quam maximus neque, malesuada dapibus ipsum ante at mi. Nam tristique fermentum ante, ut dapibus massa. Nunc quis diam mauris. Suspendisse in metus imperdiet, mattis lorem quis, consequat tellus. Ut dictum ante quis sapien suscipit malesuada. Cras luctus interdum ultrices. Cras sit amet risus vitae ligula lacinia feugiat. Maecenas a semper orci. Nullam bibendum luctus turpis eu iaculis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In efficitur ac felis in tempor. Phasellus commodo diam ut ligula maximus gravida. Nullam auctor purus lectus, nec vulputate mauris dignissim sed. Suspendisse potenti. Sed congue finibus justo sit amet facilisis. Aenean tempor vitae elit vitae dapibus. </p>
-            <p>Platforms: {displayPlatforms}</p>
+            <h3><b>Platforms:</b></h3>
+            {displayPlatforms}
+            </div>
             
         </div>
     )

@@ -1,4 +1,4 @@
-import "./Sidebar.css"
+import "./styles/Sidebar.css"
 import Genres from "./Genres"
 import Order from "./Order"
 

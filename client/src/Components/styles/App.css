@@ -1,6 +1,6 @@
 .App {
-  background-color: #151515;
   text-align: center;
+  margin-top: 20px;
 }
 
 .App-logo {
@@ -44,7 +44,7 @@
 }
 
 .sideBar {
-  width: 45%;
+  width: 300px;
   text-align: left;
 }
 

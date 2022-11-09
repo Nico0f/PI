@@ -1,8 +1,6 @@
-import "./Card.css"
+import "./styles/Card.css"
 import {useHistory} from 'react-router-dom';
-import store from "../store/store"
 import { useSelector } from "react-redux";
-import axios from "axios";
 
 export default function Card(props) {
 
@@ -17,12 +15,14 @@ let genresDisplay= genres.map(e => <span key={e}>{e} </span>)
 
     return (
         <div className="Card">
-            <div className="Card-content">
+            <div onClick={() => history.push(`/home/${props.id}`)} className="Card-content">
                 <img className="Card-img" src={`${props.img}`} alt="game_img"/>
                 {/* <p>{props.platforms}</p> */}
-                <h2 onClick={() => history.push(`/home/${props.id}`)}>{props.name}</h2>
+                <div className="cardInfo">
+                <h2>{props.name}</h2>
                 <p>{["⭐", "⭐", "⭐", "⭐", "⭐"].fill(undefined, props.rating)}{props.rating} ({props.rating_float})</p>
-                <p>{genresDisplay}</p>
+                {genresDisplay.length ? <p><b>Genres:</b> {genresDisplay}</p> : <></>}
+                </div>
             </div>
         </div>
     )

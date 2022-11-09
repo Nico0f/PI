@@ -1,5 +1,5 @@
 import React from "react";
-import "./Navbar.css"
+import "./styles/Navbar.css"
 import {addSearch, changeView} from "../actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import {useHistory} from 'react-router-dom';
@@ -12,8 +12,6 @@ function Navbar() {
 
     const [search, setSearch] = React.useState("")
 
-
-    const typeView = useSelector(state => state.search)
     const dispatch = useDispatch()
 
     function handleChange(event) {
@@ -25,7 +23,6 @@ function Navbar() {
 
     function handleSubmit(event) {
         event.preventDefault()
-        // console.log(search)
         fetch(`http://localhost:3001/videogames?name=${search}`)
             .then(data => data.json())
             .then(res => dispatch(addSearch(res)))
@@ -38,7 +35,7 @@ function Navbar() {
 
     return (
         <div className="Navbar">
-            <div><h2 onClick={() => history.push("/home")}>Gam.IO</h2></div>
+            <Link to="/home"><div><h2>Gam.IO</h2></div></Link>
             <form className="searchBar-container" onSubmit={handleSubmit}>
                 <input type="text" className="searchBar" placeholder="Search Game..." onChange={handleChange} value={search} ></input>
                 <button type="submit" className="button"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"

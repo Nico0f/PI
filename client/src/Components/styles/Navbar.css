@@ -4,6 +4,9 @@
     height: 50px;
     justify-content: space-between;
     color: antiquewhite;
+    background-color: #151515;
+    align-items: center;
+
 }
 
 .Navbar > input {

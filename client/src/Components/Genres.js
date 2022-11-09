@@ -1,7 +1,7 @@
 import React from "react"
 import {changeView, change_genre} from "../actions/index";
-import { useDispatch, useSelector } from "react-redux";
-import "./Genres.css"
+import { useDispatch } from "react-redux";
+import "./styles/Genres.css"
 
 
 
@@ -20,7 +20,6 @@ export default function Genres(props) {
         props.changeGenre(genre)
         dispatch(changeView("genre"))
         dispatch(change_genre(genre))
-        // console.log(genre)
     }
 
     function reset(event) {

@@ -1,10 +1,9 @@
-import './App.css';
-import store from "../store/store"
+import './styles/App.css';
 import Cards from "./Cards"
 import React from 'react';
 import Sidebar from './Sidebar';
 
-import {add_game, loading, add_genre} from "../actions/index";
+import {add_game, add_genre} from "../actions/index";
 
 
 import { useDispatch, useSelector } from "react-redux";
@@ -23,9 +22,7 @@ function App() {
 
   const dispatch = useDispatch()
 
-  // React.useEffect(() => {
-  //   fetch("http://localhost:3001/videogame")
-  // }, [])
+
   React.useEffect(async () => {
     if (!games.length) {
       await fetch("http://localhost:3001/videogames")
@@ -36,16 +33,7 @@ function App() {
                 .then(data => data.json())
                 .then(res => res.forEach(e => dispatch(add_genre(e))))
                 .then(data => data)
-        //setCardsState((prevState) => ({...prevState, typeView:"genre"}))
-      //   .then(res => console.log(res))
     }
-    // if (!state.genres.length) {
-    //   fetch("http://localhost:3001/genres")
-    //     .then(data => data.json())
-    //     .then(res => setState(prevState => ({...prevState, genres: res})))
-    //     // .then(res => console.log(res))
-    // }
-      
   }, [])
 
 

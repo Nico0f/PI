@@ -1,6 +1,6 @@
 // import './App.css';
 import { Link } from 'react-router-dom';
-import './Home.css';
+import './styles/Home.css';
 
 
 import store from "../store/store"
@@ -20,16 +20,6 @@ const Home = ({add_game, add_genre}) => {
   const history = useHistory();
 
   async function getall() {
-  //   // await add_game({hola:"jaja"})
-  //   // await console.log(store.getState())
-  //     // fetch("http://localhost:3001/videogame")
-  //     fetch("http://localhost:3001/videogames")
-  //       .then(data => data.json())
-  //       .then(res => res.forEach(e => add_game(e)))
-  //       .then(history.push('/home'))
-  //     fetch("http://localhost:3001/genres")
-  //       .then(data => data.json())
-  //       .then(res => res.forEach(e => add_genre(e)))
   setLoading(true)
         await fetch("http://localhost:3001/videogames")
         await fetch("http://localhost:3001/genres")
@@ -39,7 +29,6 @@ const Home = ({add_game, add_genre}) => {
   return (
     <div className="App">
       <h1>Gam.IO</h1>
-      {/* <Link to="/home"><button type="button" >asdasdasd</button></Link> */}
       {!loading && <button type="button" onClick={getall}>Enter</button>}
       {loading && <div>
         <div class="loader">
@@ -66,19 +55,3 @@ const Home = ({add_game, add_genre}) => {
 
 
 export default connect(null, {add_game, loading, add_genre} )(Home);
-
-// function Home() {
-
-//     // function getall() {
-//     //     fetch("http://localhost:3001/videogame")
-//     // }
-
-//   return (
-//     <div className="App">
-//       <h1>Otra pag</h1>
-//       <Link to="/home"><button type="button">asdasdasd</button></Link>
-//     </div>
-//   );
-// }
-
-// export default Home;

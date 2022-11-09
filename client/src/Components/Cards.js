@@ -1,10 +1,6 @@
 import React from "react";
 import Card from "./Card"
-import store from "../store/store";
-import "./Cards.css"
-
-
-
+import "./styles/Cards.css"
 import {changeView} from "../actions/index";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -19,13 +15,6 @@ export default function Cards(props) {
 
 
     const [cardsState, setCardsState] = React.useState({index: 0, genres: [], genre: "Indie"})
-
-    // React.useEffect(() => {
-
-    //   setCardsState((prevState) => ({...prevState, genres: props.props.genres}))
-
-    // }, [])
-
 
 
     function asc( a, b ) {
@@ -69,12 +58,9 @@ export default function Cards(props) {
         }
         return 0;
       }
-      // let data = props.props.games
-      
-      // console.log(s)
+
       let displayArray = []
-      // console.log(games)
-      
+ 
   switch (typeView) {
     case "desc":
       displayArray = games.sort(desc).map(e => <Card name={e.name} img={e.img} rating={e.rating_int} rating_float={e.rating_float} platforms={e.platforms} key={e.id} id={e.id}/>)
@@ -111,18 +97,12 @@ export default function Cards(props) {
       displayArray = games.map(e => <Card name={e.name} img={e.img} rating={e.rating_int} rating_float={e.rating_float} platforms={e.platforms} key={e.id} id={e.id}/>);
       break;
   }
-      
 
-      
-  
-  
-  
   const pag = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
   
   let arr = pag.map(el => el+(15*(cardsState.index)))
   const displayp = displayArray.filter((e,i) => arr.includes(i))
     
-  // const cardpagasc = cardsasc.filter((e,i) => arr.includes(i))
   
   const paginas = Math.ceil((displayArray.length/15))
   const paginado = []
@@ -147,14 +127,10 @@ export default function Cards(props) {
     return (
         <div>
             <div>
-              <button onClick={() => console.log(cardsState.index)}></button>
                 {paginado.length > 1 ? ([<button type="button" key="back" className="buttonIndex" onClick={pageBack}>🢠</button>, paginado, <button type="button" key="last" className="buttonIndex" onClick={pageFordward}>🢡</button>]) : (cardsState.index === 0) ? <></> : setCardsState((prevState) => ({...prevState, index:0}))}
             </div>
             {displayp}
-            <p>type of view</p>
-            {/* <button type="button" onClick={() => setCardsState((prevState) => ({...prevState, typeView:"asc"}))}>asc</button> */}
+            <button onClick={() => console.log(genres)}></button>
         </div>
     )
 }
-
-{/* <button type="button" key="in" onClick={() => setCardsState((prevState) => ({...prevState, index: 1}))}><</button> */}

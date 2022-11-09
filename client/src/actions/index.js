@@ -55,7 +55,7 @@ export function allgames() {
       }
     }
   export function createVideogame(payload) {
-    axios.post("http://localhost:3001/videogames")
+    axios.post("http://localhost:3001/videogames", payload)
       return {
         type: 'CREATE_VIDEOGAME',
         payload
