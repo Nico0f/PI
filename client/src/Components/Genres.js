@@ -1,6 +1,10 @@
 import React from "react"
-import {changeView} from "./actions/index";
+import {changeView, change_genre} from "../actions/index";
 import { useDispatch, useSelector } from "react-redux";
+import "./Genres.css"
+
+
+
 export default function Genres(props) {
     const dispatch = useDispatch()
 
@@ -15,7 +19,14 @@ export default function Genres(props) {
         event.preventDefault()
         props.changeGenre(genre)
         dispatch(changeView("genre"))
+        dispatch(change_genre(genre))
         // console.log(genre)
+    }
+
+    function reset(event) {
+        event.preventDefault()
+        dispatch(changeView(""))
+        dispatch(change_genre(""))
     }
 
 
@@ -23,7 +34,7 @@ export default function Genres(props) {
         <div>
             <form onSubmit={handleSubmit}>
                 <fieldset>
-                    <legend>Genres</legend>
+                    <legend>Sort by Genres</legend>
 
                     <input
                         type="radio"
@@ -237,6 +248,7 @@ export default function Genres(props) {
                     <br />
                 </fieldset>
                 <button>Submit</button>
+                <button type="button" onClick={reset}>Reset</button>
             </form>
         </div>
     )

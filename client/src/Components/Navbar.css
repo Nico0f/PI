@@ -1,0 +1,76 @@
+.Navbar {
+    display: flex;
+    padding: 10px;
+    height: 50px;
+    justify-content: space-between;
+    color: antiquewhite;
+}
+
+.Navbar > input {
+    width: 75%;
+}
+
+
+.searchBar-container {
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchBar {
+    width: 75%;
+    height: 60%;
+    /* font-weight: 500; */
+    font-size: .8vw;
+    color: #fff;
+    background-color: rgb(73, 73, 80);
+    box-shadow: 0 0 .4vw rgba(0, 0, 0, 0.5), 0 0 0 .15vw transparent;
+    border-radius: 0.4vw;
+    border: none;
+    outline: none;
+    padding: 0.4vw;
+    transition: .4s;
+    /* height: ; */
+}
+
+
+.searchBar:hover {
+    box-shadow: 0 0 0 .15vw rgba(135, 207, 235, 0.186);
+  }
+  
+  .searchBar:focus {
+    box-shadow: 0 0 0 .15vw skyblue;
+  }
+  
+  
+.button {
+    width: 40px;
+    background: none;
+    border: none;
+    border-radius: 10px;
+}
+
+    
+  
+.button svg {
+    color: #fff;
+  }
+
+.button:hover {
+    box-shadow: 0 0 0 .15vw rgba(255, 255, 255, 0.186);
+    background: rgba(170, 170, 170, 0.062);
+    transition: 0.5s;
+  }
+/* .searchBar:focus {
+    box-shadow: 0 0 0 .15vw skyblue;
+  } */
+/* .searchBar {
+
+}
+
+
+.searchBar > input {
+    width: 20;
+} */
+

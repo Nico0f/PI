@@ -10,5 +10,7 @@ module.exports = (sequelize) => {
     games: {
       type: DataTypes.ARRAY(DataTypes.STRING),
     }
-  });
+  }, {
+    timestamps: false
+    });
 };

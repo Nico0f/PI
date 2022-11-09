@@ -15,6 +15,13 @@ export function add_genre(payload) {
       type: 'ADD_GENRE',
       payload
     }
+
+  }
+export function change_genre(payload) {
+    return {
+      type: 'CHANGE_GENRE',
+      payload
+    }
   }
 
 export function add_all(payload) {

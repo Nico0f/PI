@@ -1,0 +1,19 @@
+.image {
+    width: 350px;
+}
+
+.mainDiv-game {
+    margin: auto;
+    border: solid white;
+    width: 75%;
+    color: azure;
+    background-color: #232323;
+}
+
+.upperDiv {
+    display: flex;
+}
+
+.infoDiv {
+    margin-left: 12px;
+}

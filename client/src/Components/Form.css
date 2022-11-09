@@ -1,0 +1,77 @@
+.formDiv {
+    width: 1000px;
+    margin: 0 auto;
+    border: solid white 3px;
+    border-radius: 10px;
+    color: rgb(163, 157, 149);
+    background-color: #232323;
+
+}
+
+.fieldSet {
+    columns: 4 8em;
+}
+.formContainer {
+    display: flex;
+}
+
+.infoFirst {
+    width: 600px;
+    border: solid 1px;
+    text-align: center;
+}
+.infoSecond {
+    border: solid 1px;
+}
+
+
+.fieldSet > legend {
+    background-color: #000;
+    color: #fff;
+    padding: 3px 6px;
+}
+
+.fieldSet > input {
+    margin: .4rem;
+}
+
+.textBox {
+    width: 75%;
+    height: 20px;
+    /* font-weight: 500; */
+    font-size: .8vw;
+    color: #fff;
+    background-color: rgb(73, 73, 80);
+    box-shadow: 0 0 .4vw rgba(0, 0, 0, 0.5), 0 0 0 .15vw transparent;
+    border-radius: 0.4vw;
+    border: none;
+    outline: none;
+    padding: 0.4vw;
+    transition: .4s;
+    /* height: ; */
+}
+
+
+.textBox:hover {
+    box-shadow: 0 0 0 .15vw rgba(135, 207, 235, 0.186);
+  }
+  
+  .textBox:focus {
+    box-shadow: 0 0 0 .15vw skyblue;
+  }
+
+.textArea {
+    width: 95%;
+    height: 100px;
+    /* font-weight: 500; */
+    font-size: .8vw;
+    color: #fff;
+    background-color: rgb(73, 73, 80);
+    box-shadow: 0 0 .4vw rgba(0, 0, 0, 0.5), 0 0 0 .15vw transparent;
+    border-radius: 0.4vw;
+    border: none;
+    outline: none;
+    padding: 0.4vw;
+    transition: .4s;
+    /* height: ; */
+}

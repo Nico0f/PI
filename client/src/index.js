@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import Home from './Home';
-import Navbar from './Navbar';
-import Form from './Form';
+import App from './Components/App';
+import Home from './Components/Home';
+import Navbar from './Components/Navbar';
+import Form from './Components/Form';
+import Game from './Components/Game';
 import reportWebVitals from './reportWebVitals';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import  { Provider } from 'react-redux';
-import store from "./store"
+import store from "./store/store"
 
 
 ReactDOM.render(
@@ -26,6 +27,9 @@ ReactDOM.render(
                 </Route>
                 <Route exact path="/home/creategame">
                   <Form />
+                </Route>
+                <Route exact path="/home/:id">
+                  <Game />
                 </Route>
               </Switch>
           </Route>

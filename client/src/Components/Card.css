@@ -1,17 +1,23 @@
 .Card {
     display: inline-flex;
-    background-color: aqua;
+    background-color: #383838;
+    color: black;
     width: 380px;
     height: 400px;
     margin: 20px;
+    border-radius: 25px;
 }
 
 .Card-content {
     display: inline-block;
+    text-align: left;
+    margin-top: 0;
 
 }
+
 
 .Card-img {
     width: 380px;
     height: 250px;
+    border-radius: 25px 25px 0 0 ;
 }

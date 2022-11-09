@@ -26,6 +26,12 @@ module.exports = (sequelize) => {
     },
     img: {
       type: DataTypes.STRING
+    },
+    FormCreated: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
-  });
+  }, {
+    timestamps: false
+    });
 };

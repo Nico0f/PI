@@ -1,3 +1,4 @@
+import "./Sidebar.css"
 import Genres from "./Genres"
 import Order from "./Order"
 
@@ -6,7 +7,7 @@ export default function Sidebar(props) {
 
     
     return (
-        <div>
+        <div className="sidebarDiv">
             <Genres changeGenre={props.changeGenre}/>
             <Order />
         </div>

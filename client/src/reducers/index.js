@@ -29,6 +29,11 @@ export default (state = initialState, action) => {
                 ...state,
                 genres: [...state.genres, action.payload]
             }
+        case 'CHANGE_GENRE':
+            return {
+                ...state,
+                genre: action.payload
+            }
         case 'CHANGE_VIEW':
             return {
                 ...state,
